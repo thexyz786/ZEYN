@@ -1,8 +1,8 @@
 # Task Board — read by /daily, rewritten weekly by /review
 
 ## Week 0 (7–9 Aug) — nothing else starts until these are done
-- [ ] Register all four fall sections on MyCollege (ECON 001H via Honors filter; ACCTG 001 fills fastest) — TODAY, outranks everything
-- [ ] Sister's terms on one page, signed: scope, ₹5,000 spending authority, percentage of gross profit, ownership, exit — before any purchase
+- [x] Register all four fall sections on MyCollege — DONE 8 Aug, founder confirmed
+- [~] Sister's terms — drafted at `plan/sister-terms.md` 8 Aug. NOT DONE until she has read it, changed what she wants, and both of you have signed. No purchase before that signature.
 - [ ] FSSAI Basic Registration on foscos.fssai.gov.in (verify current fee on the portal; certificate can take 30 days)
 - [ ] Separate bank account and UPI handle in the business name
 - [ ] Decide the model (plan recommends buy-roasted-and-repack) — record the decision in state/decisions.md
@@ -17,6 +17,7 @@
 - [ ] Cup the samples side by side; choose one; log all three in suppliers.csv
 - [ ] Buy 5 kg only
 - [ ] 20 × 250 g valve pouches; label carries FSSAI number, net weight, roast date, ingredients, address, phone
+  - Print everything EXCEPT the licence number and roast date; both go on as one sticker. The certificate may not arrive before this week and printed artwork you cannot use is dead money.
 - [ ] Price at ₹350–450; confirm landed cost near ₹250–275 per bag
 
 ## Week 3 (24–30 Aug) — sell; last full-time week
