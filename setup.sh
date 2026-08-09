@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-time local setup. Run once, from this directory:  ./setup.sh
+# One-time local setup. Run once, from this directory:  bash setup.sh
 # Pass --no-schedule to skip installing the cron entries.
 set -euo pipefail
 
@@ -19,7 +19,7 @@ if [ -z "$CLAUDE_BIN" ]; then
   done
 fi
 if [ -z "$CLAUDE_BIN" ]; then
-  echo "Claude Code is not installed. Install it, then re-run ./setup.sh:"
+  echo "Claude Code is not installed. Install it, then re-run bash setup.sh:"
   echo "  curl -fsSL https://claude.ai/install.sh | bash"
   exit 1
 fi
@@ -27,7 +27,16 @@ echo "  claude          $CLAUDE_BIN"
 
 # 2. Record the absolute path so cron can find it later.
 printf 'CLAUDE_BIN="%s"\n' "$CLAUDE_BIN" >scripts/env.local
+
+# Restore the executable bit. These files were published through the GitHub API, which
+# stores everything as non-executable, so a fresh clone cannot run ./setup.sh directly.
+# Record it in git too, so the repository self-heals and the fix is not re-applied forever.
 chmod +x scripts/run.sh setup.sh
+if git update-index --chmod=+x setup.sh scripts/run.sh 2>/dev/null &&
+   [ -n "$(git diff --cached --name-only)" ]; then
+  git commit -q -m "Restore executable bit on setup.sh and scripts/run.sh" 2>/dev/null \
+    && echo "  exec bit      restored and committed"
+fi
 
 # 3. Sanity-check the layout the four commands depend on.
 missing=0

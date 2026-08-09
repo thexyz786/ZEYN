@@ -19,13 +19,17 @@ Both are fixed by the same move: the files now sit at the repository root, on yo
 
 ```
 git clone -b claude/cloud-to-local-migration-lh8z36 https://github.com/thexyz786/ZEYN ~/araku-ops
-cd ~/araku-ops && ./setup.sh
+cd ~/araku-ops && bash setup.sh
 ```
 
 Nothing else to configure. `setup.sh` is idempotent — re-run it any time. It:
 
 1. Locates your `claude` binary and records the absolute path in `scripts/env.local`,
    because cron runs with a near-empty `PATH` and would not otherwise find it.
+   It also restores the executable bit on itself and `scripts/run.sh` and commits that,
+   because these files were published through the GitHub API, which stores everything
+   non-executable. That is why the command above is `bash setup.sh` and not `./setup.sh`
+   — after the first run, `./setup.sh` works too.
 2. Verifies all eight files the four commands depend on are present.
 3. Sets a git identity **for this repository only**, if you have no global one, so the
    unattended commits succeed.
@@ -66,10 +70,10 @@ crontab -l | grep -v '# araku-ops' | crontab -
 that nobody reads is not a verdict.
 
 **Check the first scheduled run landed.** `/daily` and `/gate` were both verified running
-headlessly through `scripts/run.sh`, but the cron *installation* could not be tested where
-this migration was prepared — that machine had no `crontab`. After the first 07:00, confirm
-`logs/` has an entry and `state/today.md` is dated today. If not, run `crontab -l` to check
-the two entries are there.
+headlessly through `scripts/run.sh`, including from a fresh clone of this branch, but the cron
+*installation* could not be tested where this migration was prepared — that machine had no
+`crontab`. After the first 07:00, confirm `logs/` has an entry and `state/today.md` is dated
+today. If not, run `crontab -l` to check the two entries are there.
 
 **macOS:** cron may need Full Disk Access for `/usr/sbin/cron` under System Settings →
 Privacy & Security. This is the most likely reason for a silent no-op on a Mac.

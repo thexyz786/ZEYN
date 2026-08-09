@@ -5,7 +5,7 @@ Operating system for the six-week sprint, 7 Aug – 15 Sep 2026. Runs inside Cla
 ## Setup, once
 ```
 git clone -b claude/cloud-to-local-migration-lh8z36 https://github.com/thexyz786/ZEYN ~/araku-ops
-cd ~/araku-ops && ./setup.sh
+cd ~/araku-ops && bash setup.sh
 ```
 Then `claude`, and type `/daily`. See `LOCAL.md` for what runs on its own and how to change it.
 
