@@ -31,3 +31,11 @@ The operator (who has never used Etsy or Printify) can open this file and know: 
 
 ## Findings log
 (dated, sourced entries appended by /daily)
+
+### 2026-08-09 — Printify wood/engraved catalog (backlog #1, 3 queries)
+- **How the catalog prices:** each Printify product page lists multiple print providers, each with its own base cost, production time, print method, shipping origin, and user-rated quality score — so "per-item cost" is per-provider, visible only inside the app catalog. Source: [Printify — The Complete Printify Guide (PodVector AI)](https://podvector.ai/articles/printify/explainer/the-complete-printify-guide-what-it-is-and-how-it-works), retrieved 2026-08-09.
+- **Production/shipping:** production averages ~2.5 days; ~3–7 business days total to print and ship is typical. No minimums; single-unit fulfillment. Source: [Printify — How to make custom signs](https://printify.com/blog/how-to-make-custom-signs/), retrieved 2026-08-09.
+- **⚠ Critical nuance:** Printify's wood offering is dominated by **full-color UV-printed** wood signs/plaques ("personalize signs with full-color graphics, text, and image uploads") — i.e. printed *engraved-look*, not true laser engraving. Whether any provider offers real engraving must be verified in-app. Sources: [Printify — Custom signs](https://printify.com/custom-signs/); [EComposer — Top 10 POD wood sign suppliers, 2026](https://ecomposer.io/blogs/pod/top-10-print-on-demand-wood-sign-suppliers), retrieved 2026-08-09.
+- **Price floor signals (adjacent sign products):** yard signs from ~$6.99, aluminum signs from ~$5.99 base — wood blanks will sit above this; exact wood base costs require the in-app catalog. Source: [TheCleverBusiness — Best metal/wood/yard sign POD companies](https://thecleverbusiness.com/print-on-demand-signs/), retrieved 2026-08-09.
+- **Backup suppliers lead:** EComposer's 2026 review lists 10 POD wood-sign suppliers beyond Printify — the fallback list if Printify lacks true engraving. Source: [EComposer](https://ecomposer.io/blogs/pod/top-10-print-on-demand-wood-sign-suppliers), retrieved 2026-08-09.
+- **Open remainder → curriculum Day 3:** exact per-item wood base costs and provider engraving options are only visible in the logged-in Printify catalog; the operator shortlists 5 Entry-tier products with real prices during the Day-3 lesson.
