@@ -15,11 +15,21 @@ loop the project was built around.
 
 Both are fixed by the same move: the files now sit at the repository root, on your disk.
 
+## The current layout
+
+The repository now holds two ventures side by side — `araku-ops/` (this one) and `gift-ops/`.
+Both define `/daily`, `/log`, `/review` and `/gate`, so **neither sits at the repository root**;
+the root holds only a signpost `CLAUDE.md`. Open Claude Code from `araku-ops/` and the four
+skills load exactly as before. Open it from the root and none of them exist — the same symptom
+described above, from a different cause.
+
+Clone to `~/zeyn`, not `~/araku-ops`, or the local path doubles to `~/araku-ops/araku-ops/`.
+
 ## Setup, once
 
 ```
-git clone https://github.com/thexyz786/ZEYN ~/araku-ops
-cd ~/araku-ops && bash setup.sh
+git clone https://github.com/thexyz786/ZEYN ~/zeyn
+cd ~/zeyn/araku-ops && bash setup.sh
 ```
 
 Nothing else to configure. `setup.sh` is idempotent — re-run it any time. It:
@@ -43,7 +53,7 @@ Nothing else to configure. `setup.sh` is idempotent — re-run it any time. It:
 ## Daily use
 
 ```
-cd ~/araku-ops && claude
+cd ~/zeyn/araku-ops && claude
 /daily
 /log sold 2 bags at the stall to a stranger, 400 each
 /review
@@ -81,7 +91,7 @@ Privacy & Security. This is the most likely reason for a silent no-op on a Mac.
 **Windows:** `setup.sh` needs Git Bash. Install the schedule with:
 
 ```
-schtasks /create /tn "araku-daily" /tr "\"C:\Program Files\Git\bin\bash.exe\" -lc \"cd ~/araku-ops && ./scripts/run.sh /daily\"" /sc daily /st 07:00
+schtasks /create /tn "araku-daily" /tr "\"C:\Program Files\Git\bin\bash.exe\" -lc \"cd ~/zeyn/araku-ops && ./scripts/run.sh /daily\"" /sc daily /st 07:00
 ```
 
 ## Permissions

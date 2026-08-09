@@ -8,7 +8,9 @@ This system improves its knowledge and plans from logged outcomes and cited rese
 
 ## Current Phase
 **Phase: Foundation (pre-Gate A).** Next gate: **Gate A — 15 Sep 2026** (see docs/gates.md).
-Operator is in India until ~Oct 2026, then Los Angeles. Capacity: ~5 hrs/week until 15 Sep 2026 (a separate sprint has priority), 10–15 hrs/week after.
+Operator is in India until ~Oct 2026, then Los Angeles. Capacity: ~5 hrs/week until 15 Sep 2026 (the Araku coffee sprint in `../araku-ops/` holds priority until its own 15 Sep gate), 10–15 hrs/week after.
+
+Open Claude Code **from this directory**, not the repository root — the sibling venture defines the same command names, so the root holds none. See the root `CLAUDE.md`.
 
 To cold-start a session: read this file, then `state/learnings.md`, `state/backlog.md`, `curriculum.md`, and `data/expenses.csv` (budget remaining = $600 − sum of amounts).
 
