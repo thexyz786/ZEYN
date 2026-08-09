@@ -50,15 +50,37 @@ cd ~/araku-ops && claude
 /gate
 ```
 
+## The brief
+
+**https://claude.ai/code/artifact/bf3d8aea-f510-4e83-ac43-d00ab8e1f2d5**
+
+Bookmark it. That URL never changes — every run republishes the same page in place, so the
+link in your bookmarks bar and on your phone is always this morning's brief. It is private
+until you share it from the page's own share menu.
+
 ## What runs on its own
 
-| When | What | Where the output goes |
-|---|---|---|
-| 07:00 every day | `/daily` | `state/today.md`, appended to `logs/` |
-| 18:00 every Sunday | `/review` | `state/learnings.md`, `state/tasks.md`, `logs/` |
+Two layers, deliberately. The local one owns the ledger; the cloud one guarantees the brief
+reaches you even when your laptop is shut.
 
-Each run commits `data/` and `state/` to your local git history so the day is durable and your
-working tree stays clean. It never pushes — nothing leaves the machine unless you push it.
+| When | Where | What | Output |
+|---|---|---|---|
+| 07:00 daily | your machine (cron) | `/daily` | writes `state/today.md`, republishes the brief, opens it in your browser |
+| 18:00 Sundays | your machine (cron) | `/review` | rewrites `state/learnings.md` and `state/tasks.md` |
+| 07:40 daily | cloud (Routine `Araku daily brief`) | `/daily`, plus `/review` on Sundays and `/gate` on 14–15 Sep | republishes the same page, pushes the brief to your phone and inbox |
+
+Each local run commits `data/` and `state/` to git and pushes. The push is what lets the cloud
+Routine read real numbers instead of stale ones — it runs 40 minutes after the local one for
+exactly that reason. Set `ARAKU_NO_PUSH=1` to keep everything strictly on this machine; the
+cloud brief will then only ever see what you last pushed by hand.
+
+**Provenance is printed on the page.** The cloud Routine can only see rows that reached
+GitHub, so its footer states the date of the last commit touching `data/` and says plainly
+when anything logged since then is missing. A brief that cannot see your latest sales will
+tell you so rather than quietly under-reporting.
+
+Manage the Routine at [claude.ai/settings/routines](https://claude.ai/settings/routines) —
+pause it, change the time, or delete it there.
 
 Change the times by editing your crontab (`crontab -e`); remove the schedule entirely with:
 
@@ -89,12 +111,17 @@ schtasks /create /tn "araku-daily" /tr "\"C:\Program Files\Git\bin\bash.exe\" -l
 `.claude/settings.json` enforces the constitution at the tool layer, so the rules hold even
 in an unattended run rather than depending on Claude choosing to follow them:
 
-- **Allowed** — reading and writing files in this repository, local git commits.
+- **Allowed** — reading and writing files in this repository, local git commits, and
+  `Artifact`. Publishing the brief needs that last one: without it the 07:00 run stalls on a
+  confirmation prompt nobody is awake to answer, and the page silently never updates. It is
+  narrow — it publishes the brief to your own private page and nothing else.
 - **Ask first** — `WebFetch`, `WebSearch`, `git push`, `git remote`. This is the
   "Stop and ask before … any network action beyond reading" and "touching git remotes" rules.
   The plan needs you to verify the FSSAI fee and supplier prices, and to back this repository
   up, so none of these are forbidden — each one just surfaces to you before it happens. In an
   unattended cron run there is nobody to ask, so they are skipped rather than guessed at.
+  The automatic push is done by `scripts/run.sh` itself, not by Claude, so it is not gated by
+  this rule — the rule governs what Claude may do, not what a script you scheduled does.
 - **Blocked** — `curl`, `wget`, `rm`, and any installer. This is the "NEVER send, post, or
   transmit anything to anyone" rule made mechanical: a drafted WhatsApp or supplier message
   has no route off this machine, and rows cannot be deleted from `data/` via the shell.
