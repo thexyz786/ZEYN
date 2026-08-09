@@ -339,7 +339,7 @@
       <span class="tag">Live sprint · to 15 Sep</span>
       <dl>
         <dt>Automatic</dt>
-        <dd><code>/daily</code> 07:00 every day, <code>/review</code> 18:00 Sundays — cron runs these without you</dd>
+        <dd><code>/daily</code> 07:00 every day — writes the brief, republishes it, pushes, and opens the page in your browser. <code>/review</code> 18:00 Sundays, which opens nothing. A sleeping Mac skips the run entirely</dd>
         <dt>You do</dt>
         <dd><code>/log</code> after every sale, expense or supplier contact — same day, never batched</dd>
         <dt>Gate</dt>
@@ -361,12 +361,12 @@
   </div>
 
   <div class="callout" style="margin-top:20px;">
-    <span class="label">Back up, or the ledger is one hard drive deep</span>
-    <p>Araku's scheduled runs commit to your Mac and deliberately never push — nothing leaves the machine on its own. That was a privacy decision, but it means new rows exist in exactly one place. Push to GitHub about once a week so a dead laptop is an inconvenience, not the end of the sprint.</p>
+    <span class="label">Araku backs itself up. gift-ops does not.</span>
+    <p>Araku's 07:00 run now commits <em>and pushes</em> to GitHub on its own, so the coffee ledger has an off-machine copy every morning (set <code>ARAKU_NO_PUSH=1</code> to switch that off). gift-ops has no scheduled run at all, so nothing you do there leaves the laptop until you push it yourself. Do that at the end of any session where you logged orders, expenses or audits.</p>
   </div>
 <pre class="cmd">cd ~/zeyn
 git add -A
-git commit -m "week's work"
+git commit -m "gift-ops: audits and logs"
 git push</pre>
 </section>
 
