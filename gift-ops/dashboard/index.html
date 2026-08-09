@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gift-ops — Executive Brief</title>
+<style>
+  :root{
+    --walnut-deep:#221610; --walnut:#2e1f16; --walnut-card:#3a2a1d;
+    --gold:#c9a24b; --gold-soft:#e0c07e; --cream:#f2e8d8;
+    --muted:#b8a48c; --line:#54402c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--walnut-deep);color:var(--cream);
+    font-family:Georgia,'Times New Roman',serif;line-height:1.55;
+    padding:16px 14px 48px;}
+  .wrap{max-width:640px;margin:0 auto;}
+  header{border-bottom:2px solid var(--gold);padding-bottom:14px;margin-bottom:18px;}
+  .brand{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
+  h1{font-size:1.45rem;font-weight:normal;color:var(--gold-soft);margin:.2em 0 .35em;}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.92rem;color:var(--muted);}
+  .meta b{color:var(--cream);font-weight:normal;}
+  .budget{margin-top:12px;}
+  .budget-label{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin-bottom:4px;}
+  .bar{height:10px;background:var(--walnut-card);border:1px solid var(--line);border-radius:5px;overflow:hidden;}
+  .bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-soft));}
+  section{margin-bottom:22px;}
+  h2{font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+    border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:12px;}
+  .card{background:var(--walnut);border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:6px;padding:14px 16px;margin-bottom:12px;}
+  .card h3{font-size:1.02rem;color:var(--gold-soft);font-weight:normal;margin-bottom:6px;}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--walnut-deep);background:var(--gold);border-radius:3px;padding:1px 7px;margin-left:6px;vertical-align:middle;}
+  ol.steps{margin:8px 0 8px 1.2em;font-size:.95rem;}
+  ol.steps li{margin-bottom:5px;}
+  .why{font-size:.88rem;color:var(--muted);font-style:italic;}
+  .nodata{color:var(--muted);font-style:italic;}
+  ul.watch{list-style:none;}
+  ul.watch li{padding:7px 0 7px 18px;position:relative;border-bottom:1px dotted var(--line);font-size:.95rem;}
+  ul.watch li::before{content:"◆";position:absolute;left:0;top:7px;color:var(--gold);font-size:.7rem;}
+  .lesson{font-size:1.05rem;color:var(--gold-soft);}
+  footer{margin-top:30px;font-size:.78rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">gift-ops · executive brief</div>
+  <h1>Saturday, 9 August 2026</h1>
+  <div class="meta">
+    <span>Phase: <b>Foundation (pre-Gate A)</b></span>
+    <span>Next gate: <b>Gate A — 15 Sep 2026 (37 days)</b></span>
+  </div>
+  <div class="budget">
+    <div class="budget-label"><span>Budget deployed</span><span><b style="color:var(--cream)">$0</b> / $600</span></div>
+    <div class="bar"><div class="bar-fill" style="width:0%"></div></div>
+  </div>
+</header>
+
+<section>
+  <h2>Yesterday</h2>
+  <div class="card">
+    <p class="nodata">No data logged — orders.csv, expenses.csv, listings.csv, and experiments.csv are empty. First numbers appear here the day after the first /log or /audit entry.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Today's Top 3</h2>
+
+  <div class="card">
+    <h3>1 · Create your Etsy buyer account <span class="chip">curriculum · 15 min</span></h3>
+    <ol class="steps">
+      <li>Open <b>etsy.com</b> in your phone or laptop browser.</li>
+      <li>Tap <b>Sign in</b> (top right) → <b>Register</b>.</li>
+      <li>Enter your email, first name, and a password → tap <b>Register</b>.</li>
+      <li>Verify the confirmation email if Etsy sends one. That's it — this is a normal buyer account; no shop, no payment details.</li>
+    </ol>
+    <p class="why">Why: you cannot sell on a platform you've never bought on. This is Day 1 of the curriculum and the doorway to competitor research.</p>
+  </div>
+
+  <div class="card">
+    <h3>2 · Browse 10 competitor shops, log what you see <span class="chip">gate-critical · 25 min</span></h3>
+    <ol class="steps">
+      <li>In the Etsy search bar type <b>"Arabic name sign wood"</b> — press Enter.</li>
+      <li>Open a result → tap the <b>shop name</b> under the listing title to enter the shop.</li>
+      <li>Note: price band, review count, photo style — and read any Arabic text on the products <i>letter by letter</i> for errors (broken joining, LTR direction, wrong forms).</li>
+      <li>Repeat for <b>"Eid gift personalized"</b> and <b>"Islamic wall art"</b> until you've seen 10 shops.</li>
+      <li>Back here, run <b>/audit</b> once per observation — each becomes an experiments.csv row.</li>
+    </ol>
+    <p class="why">Why: Gate A requires ≥20 logged audits by 15 Sep. Every script error you log is proof of the differentiation thesis. Current count: 0 of 20.</p>
+  </div>
+
+  <div class="card">
+    <h3>3 · Read the constitution and the adab guardrails <span class="chip">foundation · 10 min</span></h3>
+    <ol class="steps">
+      <li>Open <b>CLAUDE.md</b> — thesis, honesty clause, budget rules, gate table.</li>
+      <li>Open <b>docs/adab-guardrails.md</b> — the placement rule and the per-order QC checklist.</li>
+      <li>Open <b>docs/gates.md</b> — know exactly what Gate A demands and by when.</li>
+    </ol>
+    <p class="why">Why: every future decision routes through these three documents. Ten minutes now prevents compliance rework later.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Curriculum · Day 1 of 21</h2>
+  <div class="card">
+    <h3>Etsy buyer account + competitor immersion <span class="chip">≤45 min</span></h3>
+    <p>Create a buyer account, then study 10 shops selling Arabic/Islamic personalized wood gifts: price band, reviews, photo style, script errors. Log every observation with <b>/audit</b>. Today's Top 3 actions 1 and 2 <i>are</i> this lesson — finish them and tell /reflect tonight, and the pointer advances to Day 2 (seller account + shop name shortlist).</p>
+  </div>
+</section>
+
+<section>
+  <h2>One Lesson</h2>
+  <div class="card">
+    <p class="lesson">Your unfair advantage is verification, not production.</p>
+    <p style="margin-top:6px;font-size:.92rem;">Anyone can buy a laser or connect Printify. Almost no US competitor can read what they engrave. Every misjoined letter you find today in a shop with 5,000 sales is evidence that accuracy-verified script commands a premium. (Learnings ledger is empty — this is the Day-1 curriculum insight.)</p>
+  </div>
+</section>
+
+<section>
+  <h2>Watchlist</h2>
+  <div class="card">
+    <ul class="watch">
+      <li><b>Gate A in 37 days</b> with ~5 hrs/week until 15 Sep (sprint has priority): ≥20 audits, 12 SKU specs, 3 QC-passed samples, ≥40% contribution. Sample shipping lead time makes Day 4's order the schedule risk — don't let it slip past mid-August.</li>
+      <li><b>POD margin is thin at the Entry tier:</b> 44% COGS + 13% fees = 43% contribution at $55 AOV. Below $45 AOV, Gate A's 40% bar fails — hold price discipline.</li>
+      <li><b>Research skipped</b> — web search unavailable this run; backlog item #1 (Printify wood/engraved catalog) remains top of the queue for the next /daily.</li>
+      <li><b>Ramadan 2027 clock:</b> assets freeze mid-Jan 2027, live 8 Feb 2027 — Gates B (31 Oct) and C (31 Dec) leave no slack for drift.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>Generated by /daily · 2026-08-09 · Metrics come only from data/*.csv — empty data reads "no data logged". This system does not sell. The operator sells.</footer>
+
+</div>
+</body>
+</html>
