@@ -18,7 +18,7 @@ Both are fixed by the same move: the files now sit at the repository root, on yo
 ## Setup, once
 
 ```
-git clone -b claude/cloud-to-local-migration-lh8z36 https://github.com/thexyz786/ZEYN ~/araku-ops
+git clone https://github.com/thexyz786/ZEYN ~/araku-ops
 cd ~/araku-ops && bash setup.sh
 ```
 
@@ -70,10 +70,10 @@ crontab -l | grep -v '# araku-ops' | crontab -
 that nobody reads is not a verdict.
 
 **Check the first scheduled run landed.** `/daily` and `/gate` were both verified running
-headlessly through `scripts/run.sh`, including from a fresh clone of this branch, but the cron
-*installation* could not be tested where this migration was prepared — that machine had no
-`crontab`. After the first 07:00, confirm `logs/` has an entry and `state/today.md` is dated
-today. If not, run `crontab -l` to check the two entries are there.
+headlessly through `scripts/run.sh`, including from a fresh clone, but the cron *installation*
+could not be tested where this migration was prepared — that machine had no `crontab`. After
+the first 07:00, confirm `logs/` has an entry and `state/today.md` is dated today. If not, run
+`crontab -l` to check the two entries are there.
 
 **macOS:** cron may need Full Disk Access for `/usr/sbin/cron` under System Settings →
 Privacy & Security. This is the most likely reason for a silent no-op on a Mac.
@@ -106,8 +106,3 @@ cannot read `data/` or run `/daily`. It is useful for the research half of the s
 `CLAUDE.md` forbids Claude Code from guessing at: IndiaMart trader listings, the FSSAI portal,
 competitor shelf prices in Vizag. Bring what you find back with `/log`, which is what writes
 it into the ledger. Anything not in `data/` does not exist to `/gate`.
-
-## Moving this to main
-
-The migration is on `claude/cloud-to-local-migration-lh8z36`. Once a local `/daily` works,
-merge it so a fresh clone gets a working repository by default.
