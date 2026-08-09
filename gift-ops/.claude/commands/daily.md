@@ -30,6 +30,8 @@ Run the daily engine for gift-ops. Execute these steps **in this exact order**. 
 5. **One Lesson** — the latest entry in state/learnings.md, or if none, an insight from the current curriculum day.
 6. **Watchlist** — risks, upcoming deadlines, gate-pace warnings, "research skipped" if applicable.
 
+The dashboard opens in the browser by itself — a `PostToolUse` hook in `.claude/settings.json` watches for writes to `dashboard/index.html`. Do not run `open` yourself.
+
 **(h) Print exactly one line and nothing else after it:**
 
 ```

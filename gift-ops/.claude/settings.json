@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(sed -n 's|.*\"file_path\"[[:space:]]*:[[:space:]]*\"\\([^\"]*dashboard/index\\.html\\)\".*|\\1|p'); [ -n \"$f\" ] && { open \"$f\" >/dev/null 2>&1 || xdg-open \"$f\" >/dev/null 2>&1; }; true",
+            "statusMessage": "Opening dashboard",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
