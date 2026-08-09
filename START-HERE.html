@@ -1,0 +1,388 @@
+<title>ZEYN — How this all fits together</title>
+<style>
+  :root{
+    --ground:#f4f6f5;
+    --surface:#ffffff;
+    --surface-sunk:#eaeeec;
+    --ink:#141a1c;
+    --ink-soft:#414e50;
+    --muted:#68787a;
+    --rule:#d3dbd9;
+    --rule-soft:#e3e9e7;
+    --araku:#8c4a2f;
+    --araku-wash:#f4e7e1;
+    --gift:#a8792f;
+    --gift-wash:#f5ecd9;
+    --good:#3d6b4a;
+    --warn:#8a6320;
+    --shadow:0 1px 2px rgba(20,26,28,.06), 0 4px 14px rgba(20,26,28,.05);
+    --serif:Georgia,'Iowan Old Style','Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#10161a;
+      --surface:#171f23;
+      --surface-sunk:#1d262a;
+      --ink:#e6edeb;
+      --ink-soft:#b3c0be;
+      --muted:#8a9a99;
+      --rule:#2c383c;
+      --rule-soft:#232e32;
+      --araku:#dd9370;
+      --araku-wash:#2b1c15;
+      --gift:#dcb163;
+      --gift-wash:#2a2113;
+      --good:#7fb68e;
+      --warn:#d6a84e;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#10161a;
+    --surface:#171f23;
+    --surface-sunk:#1d262a;
+    --ink:#e6edeb;
+    --ink-soft:#b3c0be;
+    --muted:#8a9a99;
+    --rule:#2c383c;
+    --rule-soft:#232e32;
+    --araku:#dd9370;
+    --araku-wash:#2b1c15;
+    --gift:#dcb163;
+    --gift-wash:#2a2113;
+    --good:#7fb68e;
+    --warn:#d6a84e;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:var(--serif); font-size:17px; line-height:1.62;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:40px 20px 80px;}
+  p{margin:0 0 1em; max-width:66ch;}
+  strong{font-weight:700;}
+  code{
+    font-family:var(--mono); font-size:.87em;
+    background:var(--surface-sunk); padding:.12em .38em; border-radius:3px;
+    border:1px solid var(--rule-soft);
+  }
+
+  .eyebrow{
+    font-family:var(--sans); font-size:.7rem; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+  }
+  h1{
+    font-size:2.1rem; line-height:1.18; font-weight:400; margin:.25em 0 .3em;
+    text-wrap:balance; letter-spacing:-.01em;
+  }
+  .standfirst{font-size:1.08rem; color:var(--ink-soft); max-width:60ch;}
+  header{border-bottom:1px solid var(--rule); padding-bottom:26px; margin-bottom:38px;}
+
+  section{margin-bottom:44px;}
+  h2{
+    font-size:1.32rem; font-weight:400; margin:0 0 .1em;
+    text-wrap:balance; letter-spacing:-.005em;
+  }
+  .sub{font-family:var(--sans); font-size:.86rem; color:var(--muted); margin:0 0 18px;}
+
+  /* two machines */
+  .machines{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:600px){ .machines{grid-template-columns:1fr;} }
+  .machine{
+    background:var(--surface); border:1px solid var(--rule);
+    border-radius:8px; padding:16px 18px; box-shadow:var(--shadow);
+  }
+  .machine h3{
+    font-family:var(--sans); font-size:.82rem; font-weight:600;
+    letter-spacing:.04em; margin:0 0 4px; color:var(--ink);
+  }
+  .machine .where{font-family:var(--mono); font-size:.76rem; color:var(--muted); display:block; margin-bottom:10px;}
+  .machine ul{margin:0; padding-left:1.05em; font-size:.92rem; color:var(--ink-soft);}
+  .machine li{margin-bottom:4px;}
+  .gap{
+    text-align:center; font-family:var(--sans); font-size:.78rem;
+    color:var(--muted); padding:10px 0 0; letter-spacing:.02em;
+  }
+
+  /* timeline */
+  ol.timeline{list-style:none; margin:0; padding:0; counter-reset:step;}
+  ol.timeline li{
+    counter-increment:step; position:relative;
+    padding:0 0 20px 42px; border-left:1px solid var(--rule); margin-left:12px;
+  }
+  ol.timeline li:last-child{border-left-color:transparent; padding-bottom:0;}
+  ol.timeline li::before{
+    content:counter(step); position:absolute; left:-12px; top:0;
+    width:24px; height:24px; border-radius:50%;
+    background:var(--surface); border:1px solid var(--rule); color:var(--muted);
+    font-family:var(--sans); font-size:.72rem; font-weight:600;
+    display:flex; align-items:center; justify-content:center;
+  }
+  ol.timeline li.done::before{
+    background:var(--good); border-color:var(--good); color:var(--surface);
+    content:"✓"; font-size:.8rem;
+  }
+  ol.timeline h4{
+    font-family:var(--sans); font-size:.95rem; font-weight:600;
+    margin:1px 0 3px; color:var(--ink);
+  }
+  ol.timeline p{font-size:.94rem; color:var(--ink-soft); margin:0; max-width:58ch;}
+
+  /* repo map */
+  pre.map{
+    font-family:var(--mono); font-size:.82rem; line-height:1.75;
+    background:var(--surface); border:1px solid var(--rule); border-radius:8px;
+    padding:18px 20px; overflow-x:auto; margin:0; box-shadow:var(--shadow);
+  }
+  pre.map .c-araku{color:var(--araku); font-weight:600;}
+  pre.map .c-gift{color:var(--gift); font-weight:600;}
+  pre.map .note{color:var(--muted);}
+
+  /* command blocks */
+  pre.cmd{
+    font-family:var(--mono); font-size:.83rem; line-height:1.7;
+    background:var(--surface-sunk); border:1px solid var(--rule);
+    border-left:3px solid var(--ink-soft);
+    border-radius:6px; padding:13px 16px; overflow-x:auto; margin:0 0 14px;
+  }
+  pre.cmd .cm{color:var(--muted);}
+
+  /* callout */
+  .callout{
+    background:var(--surface); border:1px solid var(--rule);
+    border-left:3px solid var(--warn); border-radius:6px;
+    padding:14px 18px; margin:0 0 16px; box-shadow:var(--shadow);
+  }
+  .callout p{margin:0; font-size:.95rem;}
+  .callout .label{
+    font-family:var(--sans); font-size:.7rem; font-weight:700; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--warn); display:block; margin-bottom:5px;
+  }
+
+  /* venture table */
+  .ventures{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:600px){ .ventures{grid-template-columns:1fr;} }
+  .v{border:1px solid var(--rule); border-radius:8px; padding:16px 18px; background:var(--surface); box-shadow:var(--shadow);}
+  .v.araku{border-top:3px solid var(--araku);}
+  .v.gift{border-top:3px solid var(--gift);}
+  .v h3{font-family:var(--mono); font-size:.9rem; font-weight:600; margin:0 0 2px;}
+  .v.araku h3{color:var(--araku);}
+  .v.gift h3{color:var(--gift);}
+  .v .tag{
+    font-family:var(--sans); font-size:.7rem; font-weight:600; letter-spacing:.06em;
+    text-transform:uppercase; display:inline-block; padding:2px 7px; border-radius:3px; margin-bottom:10px;
+  }
+  .v.araku .tag{background:var(--araku-wash); color:var(--araku);}
+  .v.gift .tag{background:var(--gift-wash); color:var(--gift);}
+  .v dl{margin:0; font-size:.9rem;}
+  .v dt{font-family:var(--sans); font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-top:9px;}
+  .v dd{margin:1px 0 0; color:var(--ink-soft);}
+  .v dd code{font-size:.85em;}
+
+  /* checklist */
+  ul.todo{list-style:none; margin:0; padding:0;}
+  ul.todo li{
+    position:relative; padding:0 0 16px 26px; font-size:.97rem; color:var(--ink-soft);
+  }
+  ul.todo li::before{
+    content:""; position:absolute; left:0; top:.5em;
+    width:9px; height:9px; border:1.5px solid var(--muted); border-radius:2px;
+  }
+  ul.todo li b{color:var(--ink); font-weight:600;}
+
+  .rule{border:0; border-top:1px solid var(--rule-soft); margin:0 0 38px;}
+  footer{
+    border-top:1px solid var(--rule); padding-top:18px; margin-top:10px;
+    font-family:var(--sans); font-size:.8rem; color:var(--muted);
+  }
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">ZEYN · 9 August 2026</span>
+  <h1>Two ventures, two machines, one repository</h1>
+  <p class="standfirst">What happened today, why the commands kept failing, where everything lives now, and how to run both ventures from here on.</p>
+</header>
+
+<section>
+  <h2>Start with the thing that caused all the confusion</h2>
+  <p class="sub">There are two computers involved, and they cannot see each other</p>
+  <div class="machines">
+    <div class="machine">
+      <h3>The cloud machine</h3>
+      <span class="where">hostname: vm · a datacenter</span>
+      <ul>
+        <li>Where Claude ran all day</li>
+        <li>Built gift-ops here</li>
+        <li>Pushes its work to GitHub</li>
+        <li>Gets wiped when idle</li>
+        <li><strong>Cannot see your Mac</strong></li>
+      </ul>
+    </div>
+    <div class="machine">
+      <h3>Your Mac</h3>
+      <span class="where">/Users/hatim · in front of you</span>
+      <ul>
+        <li>Where your Terminal runs</li>
+        <li>Where cron fires at 07:00</li>
+        <li>Pulls its work from GitHub</li>
+        <li>Keeps everything permanently</li>
+        <li><strong>Cannot see the cloud machine</strong></li>
+      </ul>
+    </div>
+  </div>
+  <p class="gap">GitHub sits between them — it is the only thing both can touch.</p>
+  <p style="margin-top:18px;">When you opened the Etsy tab and asked me to browse it, this is why I could not: the browser is on the right-hand machine, and I was on the left. Same reason <code>~/araku-ops</code> came back empty when I checked it — I was looking at the wrong computer's home folder.</p>
+</section>
+
+<hr class="rule">
+
+<section>
+  <h2>What happened today</h2>
+  <p class="sub">In order</p>
+  <ol class="timeline">
+    <li class="done">
+      <h4>gift-ops was built</h4>
+      <p>A full operating system for the gifting venture — constitution, nine commands, append-only ledgers, a 21-day curriculum, six reference documents, and a dashboard. It went onto a side branch so it could not disturb anything.</p>
+    </li>
+    <li class="done">
+      <h4>Twenty competitor audits were logged</h4>
+      <p>You ran them through Claude in Chrome; I classified and recorded each one. Gate A's audit requirement is met, 37 days early — and the findings argue against the venture's stated edge. More on that at the end.</p>
+    </li>
+    <li class="done">
+      <h4>The collision surfaced</h4>
+      <p>ZEYN already held the Araku coffee sprint, sitting at the repository root. My branch had been cut from a commit made before any of that existed, so the two had never met.</p>
+    </li>
+    <li class="done">
+      <h4>The command mystery was solved</h4>
+      <p>Three causes stacked up. Claude Code reads commands from the root of whatever folder you open. gift-ops kept its in <code>gift-ops/</code>. Araku uses a different mechanism entirely — <code>skills</code>, not <code>commands</code>. And both ventures name their four commands identically, so whichever owned the root would silently answer for the other.</p>
+    </li>
+    <li class="done">
+      <h4>The repository was restructured</h4>
+      <p>Each venture moved into its own folder. The root now holds nothing but a signpost. Neither can hijack the other, and both were pushed to GitHub.</p>
+    </li>
+    <li class="done">
+      <h4>Your Mac turned out to have no copy at all</h4>
+      <p>No local clone existed — which also means Araku's 07:00 briefs had never once run, three days into a six-week sprint. Cloning to <code>~/zeyn</code> fixed both problems at once.</p>
+    </li>
+    <li class="done">
+      <h4>Claude Code was installed and Araku was wired up</h4>
+      <p>Version 2.1.226, plus the PATH line your shell needed. <code>setup.sh</code> then confirmed the layout and installed the schedule: a brief every morning at 07:00, a review every Sunday at 18:00.</p>
+    </li>
+  </ol>
+</section>
+
+<hr class="rule">
+
+<section>
+  <h2>Where everything lives now</h2>
+  <p class="sub">On your Mac, at <code>~/zeyn</code> — identical to GitHub</p>
+<pre class="map">~/zeyn/
+├── CLAUDE.md          <span class="note">signpost only — no commands here, on purpose</span>
+├── <span class="c-araku">araku-ops/</span>       <span class="note">the coffee sprint</span>
+│   ├── CLAUDE.md      <span class="note">its constitution</span>
+│   ├── .claude/skills/    <span class="note">/daily /log /review /gate</span>
+│   ├── data/          <span class="note">sales, expenses, suppliers, contacts</span>
+│   ├── plan/          <span class="note">sprint.md — the plan of record</span>
+│   └── setup.sh       <span class="note">installs the schedule</span>
+└── <span class="c-gift">gift-ops/</span>        <span class="note">the gifting venture</span>
+    ├── CLAUDE.md      <span class="note">its constitution</span>
+    ├── .claude/commands/  <span class="note">nine commands</span>
+    ├── curriculum.md  <span class="note">21 days, one lesson each</span>
+    ├── data/          <span class="note">orders, expenses, listings, experiments</span>
+    ├── docs/          <span class="note">economics, gates, adab rules, market facts</span>
+    ├── knowledge/     <span class="note">research briefs, grown by /daily</span>
+    └── dashboard/     <span class="note">index.html — your morning read</span></pre>
+  <p style="margin-top:16px;"><strong>The one rule that makes it all work:</strong> always <code>cd</code> into a venture before opening Claude. From <code>~/zeyn</code> itself you get the signpost and no commands — that is deliberate, not a fault.</p>
+</section>
+
+<hr class="rule">
+
+<section>
+  <h2>What to do now</h2>
+  <p class="sub">Two commands, about three minutes</p>
+
+  <div class="callout">
+    <span class="label">One step setup.sh could not do for you</span>
+    <p>It printed <code>trust — run 'claude' here once and accept the trust dialog</code>. Claude Code asks permission before working in a new folder, and that answer has to come from you. Until you give it, the 07:00 scheduled run would stall waiting for an answer nobody is awake to give.</p>
+  </div>
+
+  <p><strong>First, the coffee sprint</strong> — open it, accept the trust prompt, sign in when the browser opens, then run the brief that has never run:</p>
+<pre class="cmd">cd ~/zeyn/araku-ops &amp;&amp; claude
+<span class="cm"># accept the trust dialog, then type:</span>
+/daily</pre>
+
+  <p><strong>Then the gifting venture</strong> — same thing, and this is where <code>/daily</code> finally answers:</p>
+<pre class="cmd">cd ~/zeyn/gift-ops &amp;&amp; claude
+<span class="cm"># accept the trust dialog, then type:</span>
+/daily
+<span class="cm"># then, to see where Gate A stands:</span>
+/gate</pre>
+
+  <p>Both will work. The nine gift-ops commands are <code>/daily</code>, <code>/reflect</code>, <code>/brief</code>, <code>/log</code>, <code>/review</code>, <code>/gate</code>, <code>/listing</code>, <code>/design-spec</code> and <code>/audit</code>.</p>
+</section>
+
+<hr class="rule">
+
+<section>
+  <h2>How to work from here</h2>
+  <p class="sub">The two ventures run on different rhythms</p>
+  <div class="ventures">
+    <div class="v araku">
+      <h3>araku-ops/</h3>
+      <span class="tag">Live sprint · to 15 Sep</span>
+      <dl>
+        <dt>Automatic</dt>
+        <dd><code>/daily</code> 07:00 every day, <code>/review</code> 18:00 Sundays — cron runs these without you</dd>
+        <dt>You do</dt>
+        <dd><code>/log</code> after every sale, expense or supplier contact — same day, never batched</dd>
+        <dt>Gate</dt>
+        <dd>15 Sep — 10 unrelated buyers, plus a supplier confirming remote ordering</dd>
+      </dl>
+    </div>
+    <div class="v gift">
+      <h3>gift-ops/</h3>
+      <span class="tag">Foundation · ~5 hrs/week</span>
+      <dl>
+        <dt>Automatic</dt>
+        <dd>Nothing. Every command is run by hand, by design</dd>
+        <dt>You do</dt>
+        <dd><code>/daily</code> each morning, work the top three actions, <code>/reflect</code> at night, <code>/log</code> and <code>/audit</code> as things happen</dd>
+        <dt>Gate</dt>
+        <dd>Gate A 15 Sep · Gate B 31 Oct · Gate C 31 Dec</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:20px;">
+    <span class="label">Back up, or the ledger is one hard drive deep</span>
+    <p>Araku's scheduled runs commit to your Mac and deliberately never push — nothing leaves the machine on its own. That was a privacy decision, but it means new rows exist in exactly one place. Push to GitHub about once a week so a dead laptop is an inconvenience, not the end of the sprint.</p>
+  </div>
+<pre class="cmd">cd ~/zeyn
+git add -A
+git commit -m "week's work"
+git push</pre>
+</section>
+
+<hr class="rule">
+
+<section>
+  <h2>Two decisions waiting for you</h2>
+  <p class="sub">Neither is mine to make</p>
+  <ul class="todo">
+    <li><b>The gift-ops thesis.</b> Its constitution says the edge is accuracy-verified Arabic script. Twenty audits found one script error in twenty shops — but four cases of Qur'anic text engraved on cutting and charcuterie boards, all of them among the cheapest, highest-selling products in the niche. The evidence says the real differentiator is <em>adab compliance</em>, not accuracy. Rewriting a constitution is your call; say the word and I'll redraft it.</li>
+    <li><b>Which venture actually leads.</b> You asked for gifting to be prioritized, and I made the two structurally equal — but both constitutions still say coffee holds priority until 15 September, and Araku's says gifting replaces it only if the coffee gate is missed. Folder layout should not quietly overrule that. If you want gifting to lead in attention, it is worth changing both documents deliberately.</li>
+  </ul>
+</section>
+
+<footer>
+  Generated 9 August 2026 · lives at <code>~/zeyn/START-HERE.html</code> — open it any time by double-clicking, or run <code>open ~/zeyn/START-HERE.html</code>
+</footer>
+
+</div>
