@@ -8,3 +8,5 @@
 **Blocked** — the sister agreement is waiting on a conversation only you can schedule; put a time on the calendar today, page in hand, and don't leave the room without both signatures. GCC and trader outreach (Week 1) stay blocked until the model decision and FSSAI filing are logged in `state/decisions.md`.
 
 **The uncomfortable one** — writing the sister's terms. A verbal "sure, I'll help" feels like enough right now; it will not feel like enough in September when she's running this alone and you're on another continent.
+
+Zero sales, zero spend, zero suppliers logged — accurate for day 3 of Week 0, not yet a problem.
