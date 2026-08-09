@@ -1,0 +1,329 @@
+<title>Araku Ops — Daily Brief</title>
+<style>
+  /* Light palette is the complete set; dark redefines tokens only. */
+  :root {
+    --paper:   #EFEEE8;
+    --surface: #FAFAF7;
+    --ink:     #1B1D17;
+    --muted:   #6E7264;
+    --rule:    #D7D7CC;
+    --critical:#A32F22;
+    --good:    #3E6B45;
+    --warn:    #8A5E15;
+    --shadow:  0 1px 2px rgba(27,29,23,.06), 0 8px 24px -16px rgba(27,29,23,.28);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:   #121310;
+      --surface: #1B1D18;
+      --ink:     #ECEBE1;
+      --muted:   #969A88;
+      --rule:    #2E3128;
+      --critical:#E4705F;
+      --good:    #7FB489;
+      --warn:    #D2A24B;
+      --shadow:  0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:   #121310;
+    --surface: #1B1D18;
+    --ink:     #ECEBE1;
+    --muted:   #969A88;
+    --rule:    #2E3128;
+    --critical:#E4705F;
+    --good:    #7FB489;
+    --warn:    #D2A24B;
+    --shadow:  0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 54rem;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1.1rem, 4vw, 2rem) 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  /* ---- masthead ---------------------------------------------------- */
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .eyebrow {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .7rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 .35rem;
+  }
+  .masthead h1 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    font-weight: 640;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .countdown { text-align: right; }
+  .countdown .n {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(2.4rem, 8vw, 3.4rem);
+    font-weight: 600;
+    line-height: .9;
+    letter-spacing: -.04em;
+    display: block;
+  }
+  .countdown .cap {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .68rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---- scoreboard -------------------------------------------------- */
+  .scoreboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .tile {
+    background: var(--surface);
+    padding: 1rem 1.05rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    min-width: 0;
+  }
+  .tile .label {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .66rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tile .value {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.7rem;
+    font-weight: 600;
+    letter-spacing: -.03em;
+    line-height: 1.05;
+  }
+  .tile .note { font-size: .78rem; color: var(--muted); }
+  .tile.is-critical .value { color: var(--critical); }
+  .tile.is-warn     .value { color: var(--warn); }
+  .tile.is-good     .value { color: var(--good); }
+
+  .pill {
+    align-self: flex-start;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .62rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: .13rem .42rem;
+    border-radius: 2px;
+    border: 1px solid currentColor;
+  }
+  .pill.critical { color: var(--critical); }
+  .pill.warn     { color: var(--warn); }
+  .pill.good     { color: var(--good); }
+
+  /* ---- sections ---------------------------------------------------- */
+  section { display: flex; flex-direction: column; gap: .9rem; }
+  h2 {
+    font-size: .74rem;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--rule);
+    font-weight: 500;
+  }
+
+  /* Ranked — the order is the priority, so the numerals carry meaning. */
+  ol.ranked { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .85rem; }
+  ol.ranked li { display: grid; grid-template-columns: 1.9rem 1fr; gap: .75rem; align-items: start; }
+  ol.ranked .rank {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--muted);
+    padding-top: .08rem;
+  }
+  ol.ranked .task { margin: 0; }
+  ol.ranked .task strong { font-weight: 640; }
+  ol.ranked .why { display: block; margin-top: .2rem; font-size: .88rem; color: var(--muted); }
+
+  .blocked { margin: 0; font-size: .95rem; }
+  .blocked + .blocked { margin-top: .7rem; }
+  .blocked .who {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .74rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+  }
+
+  /* The one thing most likely to be skipped gets the page's only heavy accent. */
+  .uncomfortable {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--critical);
+    border-radius: 3px;
+    padding: 1.15rem 1.25rem;
+    box-shadow: var(--shadow);
+  }
+  .uncomfortable p { margin: 0; }
+  .uncomfortable .head {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .68rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--critical);
+    margin-bottom: .45rem;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
+    font-size: .8rem;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+  }
+  footer code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .95em;
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Araku Ops · Visakhapatnam</p>
+      <h1>Daily brief — Sunday 9 August 2026</h1>
+    </div>
+    <div class="countdown">
+      <span class="n">37</span>
+      <span class="cap">days to gate</span>
+    </div>
+  </header>
+
+  <section aria-label="Scoreboard">
+    <div class="scoreboard">
+      <div class="tile is-critical">
+        <span class="label">Strangers</span>
+        <span class="value">0 / 10</span>
+        <span class="note">The entire experiment</span>
+      </div>
+      <div class="tile is-critical">
+        <span class="label">Revenue</span>
+        <span class="value">₹0</span>
+        <span class="note">No rows in sales.csv</span>
+      </div>
+      <div class="tile is-good">
+        <span class="label">Spend</span>
+        <span class="value">₹0</span>
+        <span class="note">of ₹30,000 cap</span>
+      </div>
+      <div class="tile is-warn">
+        <span class="label">Supplier remote_ok</span>
+        <span class="value">—</span>
+        <span class="pill warn">Pending</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Top 3 today</h2>
+    <ol class="ranked">
+      <li>
+        <span class="rank">01</span>
+        <p class="task">
+          <strong>Register all four fall sections on MyCollege.</strong>
+          ECON 001H via the Honors filter; ACCTG 001 first, it fills fastest.
+          <span class="why">Last day of the Week 0 window. The plan says this outranks everything below it. Thirty minutes.</span>
+        </p>
+      </li>
+      <li>
+        <span class="rank">02</span>
+        <p class="task">
+          <strong>Get your sister's one-page terms signed.</strong>
+          Scope, ₹5,000 spending authority, profit cut, ownership, exit.
+          <span class="why">No purchase happens before this exists. A sibling's yes to a vague question is goodwill, not an operating agreement.</span>
+        </p>
+      </li>
+      <li>
+        <span class="rank">03</span>
+        <p class="task">
+          <strong>Start FSSAI Basic Registration</strong> at foscos.fssai.gov.in.
+          <span class="why">Certificates take up to 30 days — every day this waits is a day added to your label-compliance runway.</span>
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Blocked</h2>
+    <div>
+      <p class="blocked">
+        <span class="who">Sister's terms</span>
+        Waiting on a conversation only you can schedule. Unblock it by putting a time on the calendar today, page in hand, and not leaving the room without both signatures.
+      </p>
+      <p class="blocked">
+        <span class="who">GCC / trader outreach</span>
+        Week 1 stays blocked until the model decision and FSSAI filing are logged in <code>state/decisions.md</code>. On schedule, not stalled.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="uncomfortable">
+      <p class="head">The uncomfortable one</p>
+      <p>
+        Writing the sister's terms. A verbal "sure, I'll help" feels like enough right now;
+        it will not feel like enough in September when she's running this alone and you're
+        on another continent.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Computed from <code>data/</code> only — zero rows in sales, expenses, suppliers and contacts.</span>
+    <span>Regenerated each morning by <code>/daily</code>. Log every sale the same day with <code>/log</code>; anything not in <code>data/</code> does not exist to <code>/gate</code>.</span>
+  </footer>
+
+</div>
