@@ -7,10 +7,22 @@ The operator (who has never used Etsy or Printify) can open this file and know: 
 
 ## Outline
 
-### Etsy fee schedule (current)
-- Listing fee, transaction fee, payment processing fee, offsite-ads fee, currency conversion.
-- All-in % check against the 13% assumption in docs/unit-economics.md.
-- *(to be researched)*
+### Etsy fee schedule — **verified 2026-08-13**
+Per sale, US seller:
+| Fee | Amount |
+|---|---|
+| Listing | **$0.20** per item, lasts 4 months or until sold; one fee covers all quantities |
+| Transaction | **6.5%** of the total the buyer pays — **including shipping and gift wrap** |
+| Payment processing (US) | **3% + $0.25** |
+| **Base total** | **≈9.5% + $0.45** |
+| Offsite Ads (when a sale is attributed to one) | **15%** under $10k/yr · **12%** at or above | 
+| Currency conversion (international) | 2.5% |
+
+**At $55 AOV the base fees are $5.68 = 10.3% of price** — the 13% used in docs/unit-economics.md is conservative by ~2.7 points, so real contribution is better than modelled (POD: 45.7%, not 43%).
+
+**The Offsite Ads trap.** Under $10,000 in trailing-12-month sales, participation is optional and costs 15% of an attributed sale. At or above $10,000 it becomes **mandatory at 12% — permanently, for the lifetime of the shop, even if sales later fall back below the threshold.** A $55 POD sale attributed to Offsite Ads carries $13.93 in fees (25.3%), leaving **30.7% contribution — below Gate A's 40% bar.** Opt out while eligible; revisit only when the mix can absorb it.
+
+Sources, retrieved 2026-08-13: [Printify — Etsy fees explained 2026](https://printify.com/blog/how-much-does-etsy-take-per-sale/) · [Craftybase — Complete guide to Etsy fees](https://craftybase.com/blog/the-complete-guide-to-etsy-fees) · [Etsy Fees & Payments Policy](https://www.etsy.com/legal/fees/) · [Craftybase — Offsite Ads, fees and opt-out rules](https://craftybase.com/blog/everything-you-should-know-about-etsy-offsite-ads) · [FeeProofed — Offsite Ads 12% vs 15%, the $10k rule](https://www.feeproofed.com/guides/etsy-offsite-ads-fees/)
 
 ### Printify wood/engraved catalog
 - Products available (signs, plaques, ornaments, boards), print providers, per-item cost, production days, blank sizes.

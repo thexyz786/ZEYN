@@ -8,7 +8,7 @@
   :root{
     --walnut-deep:#221610; --walnut:#2e1f16; --walnut-card:#3a2a1d;
     --gold:#c9a24b; --gold-soft:#e0c07e; --cream:#f2e8d8;
-    --muted:#b8a48c; --line:#54402c;
+    --muted:#b8a48c; --line:#54402c; --alert:#d98a63; --good:#8fb389;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--walnut-deep);color:var(--cream);
@@ -23,22 +23,30 @@
   .budget{margin-top:12px;}
   .budget-label{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin-bottom:4px;}
   .bar{height:10px;background:var(--walnut-card);border:1px solid var(--line);border-radius:5px;overflow:hidden;}
-  .bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-soft));}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-soft));}
   section{margin-bottom:22px;}
   h2{font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
     border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:12px;}
   .card{background:var(--walnut);border:1px solid var(--line);border-left:3px solid var(--gold);
     border-radius:6px;padding:14px 16px;margin-bottom:12px;}
+  .card.alert{border-left-color:var(--alert);}
+  .card.good{border-left-color:var(--good);}
   .card h3{font-size:1.02rem;color:var(--gold-soft);font-weight:normal;margin-bottom:6px;}
   .chip{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
     color:var(--walnut-deep);background:var(--gold);border-radius:3px;padding:1px 7px;margin-left:6px;vertical-align:middle;}
+  .chip.a{background:var(--alert);} .chip.g{background:var(--good);}
   ol.steps{margin:8px 0 8px 1.2em;font-size:.95rem;}
   ol.steps li{margin-bottom:5px;}
   .why{font-size:.88rem;color:var(--muted);font-style:italic;}
   .nodata{color:var(--muted);font-style:italic;}
+  table.gate{width:100%;border-collapse:collapse;font-size:.9rem;}
+  table.gate td{padding:5px 0;border-bottom:1px dotted var(--line);}
+  table.gate td:last-child{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);}
+  table.gate td .met{color:var(--good);} table.gate td .miss{color:var(--alert);}
   ul.watch{list-style:none;}
   ul.watch li{padding:7px 0 7px 18px;position:relative;border-bottom:1px dotted var(--line);font-size:.95rem;}
   ul.watch li::before{content:"◆";position:absolute;left:0;top:7px;color:var(--gold);font-size:.7rem;}
+  ul.watch li.hot::before{color:var(--alert);}
   .lesson{font-size:1.05rem;color:var(--gold-soft);}
   footer{margin-top:30px;font-size:.78rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;}
 </style>
@@ -48,10 +56,10 @@
 
 <header>
   <div class="brand">gift-ops · executive brief</div>
-  <h1>Saturday, 9 August 2026 · run 2</h1>
+  <h1>Thursday, 13 August 2026</h1>
   <div class="meta">
     <span>Phase: <b>Foundation (pre-Gate A)</b></span>
-    <span>Next gate: <b>Gate A — 15 Sep 2026 (37 days)</b></span>
+    <span>Next gate: <b>Gate A — 15 Sep 2026 (33 days)</b></span>
   </div>
   <div class="budget">
     <div class="budget-label"><span>Budget deployed</span><span><b style="color:var(--cream)">$0</b> / $600</span></div>
@@ -62,7 +70,20 @@
 <section>
   <h2>Yesterday</h2>
   <div class="card">
-    <p class="nodata">No data logged — orders.csv, expenses.csv, listings.csv, and experiments.csv are empty. First numbers appear here the day after the first /log or /audit entry.</p>
+    <p class="nodata">No data logged. orders.csv, expenses.csv and listings.csv remain empty; experiments.csv holds the 20 competitor audits from 9 Aug. Nothing has been logged in four days.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Gate A · 33 days out</h2>
+  <div class="card">
+    <table class="gate">
+      <tr><td>Competitor listings audited</td><td><span class="met">20 / 20 ✓</span></td></tr>
+      <tr><td>SKU designs across 3 tiers</td><td><span class="miss">0 / 12</span></td></tr>
+      <tr><td>POD samples passing QC</td><td><span class="miss">0 / 3</span></td></tr>
+      <tr><td>Contribution ≥ 40%</td><td><span class="met">45.7% ✓</span></td></tr>
+    </table>
+    <p class="why" style="margin-top:9px;">Samples are the critical path: they cannot be ordered until the Etsy and Printify accounts exist, and then take 3–7 business days to arrive before QC can even start.</p>
   </div>
 </section>
 
@@ -72,49 +93,48 @@
   <div class="card">
     <h3>1 · Create your Etsy buyer account <span class="chip">curriculum · 15 min</span></h3>
     <ol class="steps">
-      <li>Open <b>etsy.com</b> in your phone or laptop browser.</li>
+      <li>Open <b>etsy.com</b>.</li>
       <li>Tap <b>Sign in</b> (top right) → <b>Register</b>.</li>
-      <li>Enter your email, first name, and a password → tap <b>Register</b>.</li>
-      <li>Verify the confirmation email if Etsy sends one. That's it — a normal buyer account; no shop, no payment details.</li>
+      <li>Enter email, first name, password → <b>Register</b>. Verify the email if one arrives.</li>
     </ol>
-    <p class="why">Why: you cannot sell on a platform you've never bought on. This is Day 1 of the curriculum and the doorway to competitor research.</p>
+    <p class="why">Why: the last unfinished half of Day 1 — the competitor research half is already done and logged. Everything below is blocked until this exists.</p>
+  </div>
+
+  <div class="card alert">
+    <h3>2 · Open the seller account — and opt out of Offsite Ads <span class="chip a">gate-critical · 45 min</span></h3>
+    <ol class="steps">
+      <li>On etsy.com scroll to the footer → <b>Sell on Etsy</b> → <b>Get started</b>.</li>
+      <li>Shop preferences: language English, country, currency <b>USD</b>.</li>
+      <li>At <b>Name your shop</b>, write a shortlist of 5 names — pronounceable, no trademark clash, hints at Arabic or wood craft. Do not pay for anything yet.</li>
+      <li><b>Shop Manager → Marketing → Offsite Ads → opt out.</b> Do this today.</li>
+    </ol>
+    <p class="why">Why: no sample, no listing, no SKU can exist without the shop. And the Offsite Ads opt-out has an expiry — see today's lesson.</p>
   </div>
 
   <div class="card">
-    <h3>2 · Browse 10 competitor shops, log what you see <span class="chip">gate-critical · 25 min</span></h3>
+    <h3>3 · Settle the thesis <span class="chip">decision · 10 min</span></h3>
     <ol class="steps">
-      <li>In the Etsy search bar type <b>"Arabic name sign wood"</b> — press Enter.</li>
-      <li>Open a result → tap the <b>shop name</b> under the listing title to enter the shop.</li>
-      <li>Note: price band, review count, photo style — and read any Arabic text on the products <i>letter by letter</i> for errors (broken joining, LTR direction, wrong forms). Note also whether their "engraved" items look printed or truly engraved — today's research says most POD wood is UV-printed.</li>
-      <li>Repeat for <b>"Eid gift personalized"</b> and <b>"Islamic wall art"</b> until you've seen 10 shops.</li>
-      <li>Back here, run <b>/audit</b> once per observation — each becomes an experiments.csv row.</li>
+      <li>Read the top three rows of <b>state/learnings.md</b>.</li>
+      <li>Decide: is the differentiator <b>verified script</b>, or <b>adab compliance</b>?</li>
+      <li>Tell Claude the answer. It rewrites CLAUDE.md's thesis — it will not do this on its own.</li>
     </ol>
-    <p class="why">Why: Gate A requires ≥20 logged audits by 15 Sep. Every script error you log is proof of the differentiation thesis. Current count: 0 of 20.</p>
-  </div>
-
-  <div class="card">
-    <h3>3 · Read today's Printify finding + the adab guardrails <span class="chip">foundation · 10 min</span></h3>
-    <ol class="steps">
-      <li>Open <b>knowledge/etsy-operator-basics.md</b> → today's findings log: how Printify pricing works and the printed-vs-engraved caveat that now shapes Day 3.</li>
-      <li>Open <b>docs/adab-guardrails.md</b> — the placement rule and per-order QC checklist you'll apply while browsing competitors in action 2.</li>
-    </ol>
-    <p class="why">Why: knowing the printed-vs-engraved distinction changes what you look for in competitor photos today, and the adab lens turns browsing into audit evidence.</p>
+    <p class="why">Why: 12 SKU designs are the largest piece of Gate A still at zero, and every one of them needs to know what it is selling against.</p>
   </div>
 </section>
 
 <section>
   <h2>Curriculum · Day 1 of 21</h2>
   <div class="card">
-    <h3>Etsy buyer account + competitor immersion <span class="chip">≤45 min · unchecked</span></h3>
-    <p>Create a buyer account, then study 10 shops selling Arabic/Islamic personalized wood gifts: price band, reviews, photo style, script errors. Log every observation with <b>/audit</b>. Today's Top 3 actions 1 and 2 <i>are</i> this lesson — finish them and tell /reflect tonight, and the pointer advances to Day 2 (seller account + shop name shortlist).</p>
+    <h3>Etsy buyer account + competitor immersion <span class="chip">half done</span></h3>
+    <p>The immersion half is complete — 20 shops audited and logged, double the lesson's target and the whole of Gate A's audit requirement. The account half is not. Finish it today (Top 3, action 1) and the pointer moves to Day 2, which is already today's action 2.</p>
   </div>
 </section>
 
 <section>
   <h2>One Lesson</h2>
-  <div class="card">
-    <p class="lesson">Printify "wood" is mostly printed, not engraved.</p>
-    <p style="margin-top:6px;font-size:.92rem;">Today's research (printify.com, EComposer 2026 review): Printify's wood catalog is dominated by full-color UV-printed signs — an engraved <i>look</i>, not laser engraving. The Entry tier may launch as printed engraved-style until Gate B unlocks the in-house laser. Day 3 verifies in-app whether any provider does real engraving; the Day-4 sample decides if printed passes QC. (Latest entry, state/learnings.md.)</p>
+  <div class="card alert">
+    <p class="lesson">Etsy's Offsite Ads opt-out is a door that locks behind you.</p>
+    <p style="margin-top:6px;font-size:.92rem;">Verified today: under $10,000 in trailing-12-month sales, Offsite Ads is optional and costs 15% of an attributed sale. At $10,000 it becomes <b>mandatory at 12% — for the lifetime of the shop</b>, and it does not become optional again if sales fall back. A $55 POD sale through an offsite ad carries 25.3% in fees and returns 30.7% contribution, under Gate A's 40% bar. Opt out now, while you still can.</p>
   </div>
 </section>
 
@@ -122,16 +142,17 @@
   <h2>Watchlist</h2>
   <div class="card">
     <ul class="watch">
-      <li><b>Gate A in 37 days</b> with ~5 hrs/week until 15 Sep (sprint has priority): ≥20 audits, 12 SKU specs, 3 QC-passed samples, ≥40% contribution. Sample shipping lead (3–7 business days per today's research) makes Day 4's order the schedule risk — don't let it slip past mid-August.</li>
-      <li><b>Printed vs engraved:</b> if no Printify provider offers true engraving, Entry-tier listings must say "printed woodgrain design" honestly — misdescribing it as engraved is both a trust and policy risk. Decision lands on curriculum Days 3–4.</li>
-      <li><b>POD margin is thin at the Entry tier:</b> 44% COGS + 13% fees = 43% contribution at $55 AOV. Below $45 AOV, Gate A's 40% bar fails — hold price discipline.</li>
-      <li><b>Backlog: 1 of 6 answered</b> — next research item: current Etsy fee schedule (verifies the 13% assumption in unit economics).</li>
-      <li><b>Ramadan 2027 clock:</b> assets freeze mid-Jan 2027, live 8 Feb 2027 — Gates B (31 Oct) and C (31 Dec) leave no slack for drift.</li>
+      <li class="hot"><b>Four days idle, and samples are the binding constraint.</b> Three POD samples must be ordered, shipped (3–7 business days), received and QC'd before 15 Sep — and none can be ordered until the accounts exist. Working back, the order needs to be placed by the end of August at the latest.</li>
+      <li class="hot"><b>No automation here by design.</b> gift-ops has no cron; nothing runs unless you run it. The araku 07:00 schedule did not fire on 10, 11 or 12 Aug either — cron does not wake a sleeping Mac.</li>
+      <li><b>Good news on margin:</b> Etsy's real base fees are 10.3% at $55, not the 13% modelled, so POD contribution is 45.7%. The model stays conservative on purpose; the extra room is a buffer, not a budget.</li>
+      <li><b>The thesis is still unresolved</b> — 20 audits found 1 script error and 4 adab violations. Until you decide, SKU design work has no brief.</li>
+      <li><b>Backlog: 2 of 6 answered.</b> Next: the top-20 competitor shortlist is superseded; the live question is the 13-tag sets for "Eid gifts personalized" and "Arabic name art".</li>
+      <li><b>Ramadan 2027:</b> assets freeze mid-Jan, live 8 Feb. Gates B (31 Oct) and C (31 Dec) sit between here and there with no slack.</li>
     </ul>
   </div>
 </section>
 
-<footer>Generated by /daily · 2026-08-09 (run 2) · Metrics come only from data/*.csv — empty data reads "no data logged". This system does not sell. The operator sells.</footer>
+<footer>Generated by /daily · 2026-08-13 · Metrics come only from data/*.csv — empty data reads "no data logged". This system does not sell. The operator sells.</footer>
 
 </div>
 </body>

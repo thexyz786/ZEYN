@@ -1,6 +1,8 @@
 # Unit Economics
 
-Working assumptions until real orders overwrite them with logged data. Fees: **13% of price all-in** (Etsy transaction + payment processing + listing amortization; verify against the current fee schedule — backlog item #2).
+Working assumptions until real orders overwrite them with logged data. Fees: **13% of price all-in** (Etsy transaction + payment processing + listing amortization).
+
+> **Verified 2026-08-13.** Etsy's actual base fees are $0.20 listing + 6.5% transaction + 3% & $0.25 processing = **10.3% at $55**. The 13% planning figure is deliberately kept as a conservative buffer — every contribution number below is therefore a floor, not a forecast. **Exception: Offsite Ads.** An attributed sale adds 15% (12% and mandatory once the shop passes $10k/yr, permanently), which drops POD contribution to 30.7% and fails the Gate A bar. Opt out while eligible. Detail and sources: `knowledge/etsy-operator-basics.md`.
 
 ## Fulfillment routes
 
